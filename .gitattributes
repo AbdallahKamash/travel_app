@@ -1,1 +1,2 @@
-*.cpp linguist-vendored
+* linguist-vendored
+*.dart linguist-vendored=false
