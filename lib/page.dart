@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_app/vars.dart';
 
 class Page1 extends StatefulWidget {
   const Page1({super.key});
@@ -10,32 +11,30 @@ class Page1 extends StatefulWidget {
 class _Page1State extends State<Page1> {
   @override
   Widget build(BuildContext context) {
-    //return a scaffold with four nav tabs beneath, and a home page with a carousel of cards whowing vacation places, and a recommened tab underneath
+    final s = MediaQuery.of(context).size;
+    setState(() {
+      isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    });
+    configColors();
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          Container(
-            height: 200,
-            width: 200,
-            color: Colors.red,
-          ),
-          Container(
-            height: 200,
-            width: 200,
-            color: Colors.blue,
-          ),
-          Container(
-            height: 200,
-            width: 200,
-            color: Colors.green,
-          ),
-          Container(
-            height: 200,
-            width: 200,
-            color: Colors.yellow,
-          ),
-        ],
+      body: AnimatedContainer(
+        duration: const Duration(milliseconds: 500),
+        color: primary,
+        height: s.height,
+        width: s.width,
+        child: PageView(
+          children: [
+            Container(
+              color: Colors.red,
+            ),
+            Container(
+              color: Colors.blue,
+            ),
+        Container(
+              color: Colors.green,
+            ),
+          ],
+        ),
       ),
     );
   }

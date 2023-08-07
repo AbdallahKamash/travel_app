@@ -11,25 +11,6 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  bool animate = false;
-
-
-  @override
-  void initState() {
-    setState(() {
-      animate = true;
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    setState(() {
-      animate = true;
-    });
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final s = MediaQuery.of(context).size;
@@ -38,8 +19,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     });
     configColors();
     return Scaffold(
-      backgroundColor: primary,
-      body: SizedBox(
+      body: AnimatedContainer(
+        duration: const Duration(milliseconds: 500),
+        color: primary,
         height: s.height,
         width: s.width,
         child: Column(
@@ -78,9 +60,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 children: [
                    Text(
                     'Wonderful Vacation Trips!',
-                    style: TextStyle(fontSize: 26, color: secondary, height: 1.2, fontWeight: FontWeight.w700,  shadows: const [
+                    style: TextStyle(fontSize: 26, color: secondary, height: 1.2, fontWeight: FontWeight.w700,  shadows: [
                       Shadow(
-                          color: Colors.lightBlue,
+                          color: palette,
                           offset: Offset(2, 2),
                           blurRadius: 1000)
                     ]),
@@ -90,23 +72,22 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ' and the Sahara in the south, and mountains filled with ancient ruins of old'
                         ' times spread across, the nature has never been more beautiful.'
                         '\n\nCome visit and enjoy your time in the Wonderful country of Libya.',
-                    style: TextStyle(fontSize: 15, color: secondary, shadows: const [
+                    style: TextStyle(fontSize: 15, color: secondary, shadows: [
                       Shadow(
-                          color: Colors.lightBlue,
+                          color: palette,
                           offset: Offset(2, 2),
                           blurRadius: 1000)
                     ]),
                   ),
-                  InkWell(
+                  GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(customRoute(Page1()));
                     },
-                    borderRadius: BorderRadius.circular(20),
                     child: Container(
                       height: s.height / 17.35,
                       width: s.width / 3,
                       decoration: BoxDecoration(
-                          color: Colors.lightBlue.shade900,
+                          color: darkPalette,
                           borderRadius:
                               BorderRadius.circular(s.height / (17.35 / 2))),
                       child: Center(
