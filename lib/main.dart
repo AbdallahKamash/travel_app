@@ -11,7 +11,7 @@ void main() {
   runApp(
      MaterialApp(
       theme: ThemeData(
-        fontFamily: 'Gotham'
+        fontFamily: 'Playfair',
       ),
       home: const WelcomeScreen(),
       debugShowCheckedModeBanner: false,

@@ -32,7 +32,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     final s = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.white, //test 1
+      backgroundColor: Colors.white,
       body: SizedBox(
         height: s.height,
         width: s.width,
@@ -80,9 +80,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ]),
                   ),
                   const Text(
-                    '\nEnjoy your vacation in the Green Mountain located in Eastern Libya.'
-                    ' With hills meeting the seashore, the best views and nature are to be found.'
-                    '\n\nEnjoy your trip and experience a trip of a lifetime.',
+                    '\nWith the sea in the north,'
+                        ' and the Sahara in the south, and mountains filled with ancient ruins of old'
+                        ' times spread across, the nature has never been more beautiful.'
+                        '\n\nCome visit and enjoy your time in the Wonderful country of Libya.',
                     style: TextStyle(fontSize: 16, shadows: [
                       Shadow(
                           color: Colors.lightBlue,
@@ -94,9 +95,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                     child: InkWell(
                       onTap: () {
-                        //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Page1()));
-                        Navigator.push(
-                            context, FadeRoute(widget: const Page1()));
+                        Navigator.of(context).push(customRoute(Page1()));
                       },
                       borderRadius: BorderRadius.circular(20),
                       child: Container(
