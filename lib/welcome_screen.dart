@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/fade_route.dart';
 import 'package:travel_app/page.dart';
+import 'package:travel_app/vars.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -11,6 +12,7 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   bool animate = false;
+
 
   @override
   void initState() {
@@ -31,8 +33,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     final s = MediaQuery.of(context).size;
+    setState(() {
+      isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    });
+    configColors();
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: primary,
       body: SizedBox(
         height: s.height,
         width: s.width,
@@ -44,76 +50,73 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               height: s.height * 0.6,
               width: s.width,
               decoration: BoxDecoration(
-                  color: Colors.red,
+                  color: primary,
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF000000).withAlpha(100),
-                      blurRadius: 6.0,
-                      spreadRadius: 5.0,
+                      color: secondary.withAlpha(60),
+                      blurRadius: 100.0,
+                      spreadRadius: 2.0,
                       offset: const Offset(
                         0.0,
-                        3.0,
+                        0.0,
                       ),
                     ),
                   ],
                   borderRadius:
                       const BorderRadius.vertical(bottom: Radius.circular(40)),
                   image: const DecorationImage(
-                      image: AssetImage('lib/assets/waterfalls.jpeg'),
+                      image: AssetImage('lib/assets/gm.jpg'),
                       fit: BoxFit.fitHeight)),
             ),
             Container(
               width: s.width,
-              height: s.height * 0.375,
+              height: s.height * 0.35,
               padding: const EdgeInsets.all(15),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                   Text(
                     'Wonderful Vacation Trips!',
-                    style: TextStyle(fontSize: 30, height: 1.2, shadows: [
+                    style: TextStyle(fontSize: 26, color: secondary, height: 1.2, fontWeight: FontWeight.w700,  shadows: const [
                       Shadow(
                           color: Colors.lightBlue,
                           offset: Offset(2, 2),
                           blurRadius: 1000)
                     ]),
                   ),
-                  const Text(
-                    '\nWith the sea in the north,'
+                   Text(
+                    'With the sea in the north,'
                         ' and the Sahara in the south, and mountains filled with ancient ruins of old'
                         ' times spread across, the nature has never been more beautiful.'
                         '\n\nCome visit and enjoy your time in the Wonderful country of Libya.',
-                    style: TextStyle(fontSize: 16, shadows: [
+                    style: TextStyle(fontSize: 15, color: secondary, shadows: const [
                       Shadow(
                           color: Colors.lightBlue,
                           offset: Offset(2, 2),
                           blurRadius: 1000)
                     ]),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(customRoute(Page1()));
-                      },
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        height: s.height / 17.35,
-                        width: s.width / 3,
-                        decoration: BoxDecoration(
-                            color: Colors.lightBlue.shade900,
-                            borderRadius:
-                                BorderRadius.circular(s.height / (17.35 / 2))),
-                        child: Center(
-                            child: Text(
-                          'Let\'s Go!',
-                          style: TextStyle(
-                              fontSize: (s.height / (17.35 * 2)) - 5,
-                              height: 1,
-                              color: Colors.white),
-                        )),
-                      ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(customRoute(Page1()));
+                    },
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      height: s.height / 17.35,
+                      width: s.width / 3,
+                      decoration: BoxDecoration(
+                          color: Colors.lightBlue.shade900,
+                          borderRadius:
+                              BorderRadius.circular(s.height / (17.35 / 2))),
+                      child: Center(
+                          child: Text(
+                        'Let\'s Go!',
+                        style: TextStyle(
+                            fontSize: (s.height / (17.35 * 2)) - 5,
+                            height: 1,
+                            color: Colors.white),
+                      )),
                     ),
                   )
                 ],
