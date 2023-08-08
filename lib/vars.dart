@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
 
 bool isDarkMode = false;
+bool isNew = true;
+
+PageController page1Con = PageController(initialPage: 0);
+
+List<String> tabs = [
+  'All',
+  'Popular',
+  'New',
+  'Recommended',
+  'Trending',
+  'Top Rated'
+];
+
+Map<dynamic, dynamic> places = {
+
+};
+
+
 Color primary = Colors.white;
 Color secondary = Colors.black;
 
