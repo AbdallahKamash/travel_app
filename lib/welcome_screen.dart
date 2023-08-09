@@ -12,6 +12,22 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
+  void initState() {
+    setState(() {
+      r = 10;
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    setState(() {
+      r = 10;
+    });
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final s = MediaQuery.of(context).size;
     setState(() {
@@ -19,8 +35,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     });
     configColors();
     return Scaffold(
-      body: AnimatedContainer(
-        duration: const Duration(milliseconds: 500),
+      body: Container(
         color: primary,
         height: s.height,
         width: s.width,
@@ -28,75 +43,67 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
+            SizedBox(
               height: s.height * 0.6,
               width: s.width,
-              decoration: BoxDecoration(
-                  color: primary,
-                  boxShadow: [
-                    BoxShadow(
-                      color: secondary.withAlpha(60),
-                      blurRadius: 100.0,
-                      spreadRadius: 2.0,
-                      offset: const Offset(
-                        0.0,
-                        0.0,
-                      ),
-                    ),
-                  ],
-                  borderRadius:
-                      const BorderRadius.vertical(bottom: Radius.circular(40)),
-                  image: const DecorationImage(
-                      image: AssetImage('lib/assets/gm.jpg'),
-                      fit: BoxFit.fitHeight)),
+              child: PageView(
+                controller: welcomeCon,
+                children: [
+                  Container(
+                    color: Colors.red,
+                  )
+                ],
+              ),
             ),
             Container(
               width: s.width,
               height: s.height * 0.35,
               padding: const EdgeInsets.all(15),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   Text(
+                  Text(
                     'Wonderful Vacation Trips!',
-                    style: TextStyle(fontSize: 26, color: secondary, height: 1.2, fontWeight: FontWeight.w700,  shadows: [
-                      Shadow(
-                          color: palette,
-                          offset: Offset(2, 2),
-                          blurRadius: 1000)
-                    ]),
+                    style: TextStyle(
+                        fontSize: 26,
+                        color: secondary,
+                        height: 1.2,
+                        fontWeight: FontWeight.w700,
+                        shadows: [Shadow(color: palette, offset: Offset(2, 2), blurRadius: 1000)]),
                   ),
-                   Text(
+                  Text(
                     'With the sea in the north,'
-                        ' and the Sahara in the south, and mountains filled with ancient ruins of old'
-                        ' times spread across, the nature has never been more beautiful.'
-                        '\n\nCome visit and enjoy your time in the Wonderful country of Libya.',
-                    style: TextStyle(fontSize: 15, color: secondary, shadows: [
-                      Shadow(
-                          color: palette,
-                          offset: Offset(2, 2),
-                          blurRadius: 1000)
-                    ]),
+                    ' and the Sahara in the south, and mountains filled with ancient ruins of old'
+                    ' times spread across, the nature has never been more beautiful.'
+                    '\n\nCome visit and enjoy your time in the Wonderful country of Libya.',
+                    style: TextStyle(fontSize: 15, color: secondary, shadows: [Shadow(color: palette, offset: Offset(2, 2), blurRadius: 1000)]),
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(customRoute(Page1()));
+                      setState(() {
+                        r = 20;
+                      });
+                      Navigator.of(context).push(customRoute(const Page1()));
+                      setState(() {
+                        r = 10;
+                      });
                     },
-                    child: Container(
-                      height: s.height / 17.35,
-                      width: s.width / 3,
-                      decoration: BoxDecoration(
-                          color: darkPalette,
-                          borderRadius:
-                              BorderRadius.circular(s.height / (17.35 / 2))),
+                    onLongPress: () {
+                      setState(() {
+                        r = 20;
+                      });
+                    },
+                    child: AnimatedContainer(
+                      duration: Duration(milliseconds: 100),
+                      height: 45,
+                      width: 150,
+                      decoration:
+                          BoxDecoration(color: darkPalette, border: Border.all(color: secondary, width: 1), borderRadius: BorderRadius.circular((r))),
                       child: Center(
                           child: Text(
                         'Let\'s Go!',
-                        style: TextStyle(
-                            fontSize: (s.height / (17.35 * 2)) - 5,
-                            height: 1,
-                            color: Colors.white),
+                        style: TextStyle(fontSize: (s.height / (17.35 * 2)) - 5, height: 1, color: Colors.black),
                       )),
                     ),
                   )
